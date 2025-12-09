@@ -2,24 +2,21 @@ package main
 
 import (
 	"fmt"
-	"os"
+	//"os"
 )
+
+const WIDTH, HEIGHT = 448, 224
 
 func main() {
 	fmt.Print("\r\nN")
-	data, err := os.ReadFile("out.bin")
-	if err != nil {
-		panic(err)
-	}
+
+	img := MakeTextImg("PLA\nMÜLL")
+	_ = Convert(img)
 
 	fmt.Print("\r\nD10") // 0-15, default 7
 
-	height := 256 // In lines (or dots)
-	width := len(data) / height // In bytes
+	fmt.Printf("\r\nGW0,0,%d,%d,", WIDTH / 8, HEIGHT)
+	//os.Stdout.Write(data)
 
-
-	fmt.Printf("\r\nGW0,0,%d,%d,", width, height)
-	os.Stdout.Write(data)
-
-	fmt.Print("\r\nP10\r\n")
+	fmt.Print("\r\nP1\r\n")
 }
