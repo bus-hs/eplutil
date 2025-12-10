@@ -10,7 +10,7 @@ const WIDTH, HEIGHT = 448, 224
 func main() {
 	fmt.Print("\r\nN")
 
-	img := MakeTextImg("PLA\nMÜLL")
+	img := MakeTextImg("PLA\nMüll")
 	_ = Convert(img)
 
 	fmt.Print("\r\nD10") // 0-15, default 7
