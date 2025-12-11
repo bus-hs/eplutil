@@ -1,11 +1,12 @@
-package main
+package eplutil
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 )
 
-func Convert(img image.Image) []byte {
+func imageToBytes(img image.Image) ([]byte, int, int) {
 	bounds := img.Bounds()
 	width, height := bounds.Max.X, bounds.Max.Y
 
@@ -35,5 +36,14 @@ func Convert(img image.Image) []byte {
 		}
 	}
 
-	return data
+	return data, byteWidth, height
+}
+
+func (b *EPLBuilder) Image(x, y int, img image.Image) {
+	data, lineBytes, lines := imageToBytes(img)
+	b.ImageBytes(x, y, lineBytes, lines, data)
+}
+
+func (b *EPLBuilder) ImageBytes(x, y, lineBytes, lines int, data []byte) {
+	b.WriteString(fmt.Sprintf("GW%d,%d,%d,%d,", x, y, lineBytes, lines) + string(data))
 }

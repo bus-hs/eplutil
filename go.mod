@@ -1,4 +1,4 @@
-module github.com/bus-hs/eplutil
+module github.com/hs-mb/eplutil
 
 go 1.25.3
 
